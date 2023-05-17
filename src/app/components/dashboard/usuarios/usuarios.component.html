@@ -1,0 +1,61 @@
+<div class="container">
+  <mat-toolbar>
+    <span>Usuarios </span>  
+    <div class="example-spacer">
+
+    </div>
+    <button mat-button color="primary" routerLink="/dashboard/crear-usuario">Agregar</button>      
+  </mat-toolbar>
+
+  <div *ngIf="listUsuarios.length > 0">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input autocomplete="off">
+    </mat-form-field>
+        
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <!-- usuario Column -->
+      <ng-container matColumnDef="usuario"> 
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
+        <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
+      </ng-container>
+      <!-- Nombre Column -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      </ng-container>
+      <!-- apellido Column -->
+      <ng-container matColumnDef="apellido">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+      </ng-container>
+      <!-- Sexo Column -->
+      <ng-container matColumnDef="sexo">
+        <th mat-header-cell *matHeaderCellDef> Sexo </th>
+        <td mat-cell *matCellDef="let element"> {{element.sexo}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element; let i=index" style="text-align: right;">
+        <a class="pointer" style="color: #164c6c"  matTooltip="Ver usuario">
+          <mat-icon>search</mat-icon>
+        </a>
+        <a class="pointer" style="color: #3830ab"  matTooltip="Editar usuario">
+          <mat-icon>edit</mat-icon>
+        </a>
+        <a class="pointer" (click)="eliminarUsuario(i)" matTooltip="Eliminar usuario" style="color: #a82121">
+          <mat-icon>delete</mat-icon>
+        </a>
+        </td>
+      </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <div *ngIf="listUsuarios.length == 0">
+    <h1 >No hay usuarios para mostrar</h1>
+    <img src="/src/assets/img/error.jpg">
+  </div>
+  
+</div>
