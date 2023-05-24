@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -11,7 +11,9 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./crear-usuario.component.css']
 })
 export class CrearUsuarioComponent {
-  sexo: any[] = ['Masculino', 'Femenino']
+  listUsuarios: Usuario[] = []; 
+
+  tipouser: any[] = ['Centro', 'Colonia Americana', 'Olimpica','Tesistan']
   form: FormGroup;
 
   constructor(private fb: FormBuilder, 
@@ -23,8 +25,13 @@ export class CrearUsuarioComponent {
       usuario: ['', Validators.required],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
-      sexo: ['', Validators.required],
-
+      entrevial2: ['', Validators.required],
+      zona: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      tipouser: ['', Validators.required],
+      tiempo: ['', Validators.required],
+      img: ['', Validators.required],
+      estadoact: ['', Validators.required]
     })
   }
 
@@ -38,12 +45,18 @@ export class CrearUsuarioComponent {
     usuario: this.form.value.usuario,
     nombre: this.form.value.nombre,
     apellido: this.form.value.apellido,
-    sexo: this.form.value.sexo  
+    entrevial2: this.form.value.entrevial2,
+    zona: this.form.value.zona,
+    descripcion: this.form.value.descripcion,
+    tipouser: this.form.value.tipouser,
+    tiempo: this.form.value.tiempo,
+    img: this.form.value.img,
+    estadoact: this.form.value.estadoact
   }
 
     this._usuarioService.agregarUsuario(user);
 
-    this._snackBar.open('Usuario agregado correctamente','',{
+    this._snackBar.open('El reporte se hizo correctamente','',{
       duration: 1500,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'

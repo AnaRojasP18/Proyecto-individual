@@ -1,6 +1,86 @@
 <div class="container">
-    <mat-toolbar>
-      <span>Reportes </span>
-    </mat-toolbar>
-    
+  <mat-toolbar>
+    <span>Reportes hecho o atendidos</span>  
+    <div class="example-spacer">
+
+    </div>
+  </mat-toolbar>
+
+  <div *ngIf="listUsuarios.length > 0">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input autocomplete="off">
+    </mat-form-field>
+        
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <!-- id Column -->
+      <ng-container matColumnDef="usuario"> 
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID reporte</th>
+        <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
+      </ng-container>
+      <!-- calle o  av Column -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Calle o avenida</th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      </ng-container>
+      <!-- entre1 Column -->
+      <ng-container matColumnDef="apellido">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Entrevialidad 1 </th>
+        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+      </ng-container>
+      <!-- entre2 Column -->
+      <ng-container matColumnDef="entrevial2">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Entrevialidad 2 </th>
+              <td mat-cell *matCellDef="let element"> {{element.entrevial2}} </td>
+      </ng-container>
+      <!-- zona Column -->
+      <ng-container matColumnDef="zona">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Zona </th>
+        <td mat-cell *matCellDef="let element"> {{element.zona}} </td>
+      </ng-container>
+      <!-- descripcion Column -->
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción</th>
+        <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+      </ng-container>
+      <!-- Tipo Column -->
+      <ng-container matColumnDef="tipouser">
+        <th mat-header-cell *matHeaderCellDef> Clasificación </th>
+        <td mat-cell *matCellDef="let element"> {{element.tipouser}} </td>
+      </ng-container>
+      <!-- tiempo Column -->
+      <ng-container matColumnDef="tiempo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tiempo de surgimiento </th>
+        <td mat-cell *matCellDef="let element"> {{element.tiempo}} </td>
+      </ng-container>
+  <!-- img Column -->
+  <ng-container matColumnDef="img">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Imagenes </th>
+    <td mat-cell *matCellDef="let element"> {{element.img}} </td>
+  </ng-container>
+  <!-- estado actual Column -->
+  <ng-container matColumnDef="estadoact">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado actual </th>
+    <td mat-cell *matCellDef="let element"> {{element.estadoact}} </td>
+  </ng-container>
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element; let i=index" style="text-align: right;">
+        <a class="pointer"  matTooltip="Ver reporte" style="color: #2164a8">
+          <mat-icon>search</mat-icon>
+        </a>
+        <a class="pointer" (click)="eliminarUsuario(i)" matTooltip="Marcar como reporte atendido" style="color: #58af5f">
+          <mat-icon>chack</mat-icon>
+        </a>
+        </td>
+      </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <div *ngIf="listUsuarios.length == 0">
+    <h1 >No hay usuarios para mostrar</h1>
+    <img src="/src/assets/img/error.png">
+  </div>
+  
 </div>

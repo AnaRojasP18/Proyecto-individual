@@ -15,7 +15,7 @@ export class UsuariosComponent {
 
   listUsuarios: Usuario[] = []; 
 
-  displayedColumns: string[] = ['usuario', 'nombre', 'apellido', 'sexo', 'acciones'];
+  displayedColumns: string[] = ['usuario', 'nombre', 'apellido', 'entrevial2', 'zona', 'descripcion','tipouser','tiempo', 'img', 'estadoact'];
   dataSource!: MatTableDataSource<any>;
   
   @ViewChild(MatSort) sort!: MatSort;
